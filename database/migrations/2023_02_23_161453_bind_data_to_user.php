@@ -12,10 +12,8 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('data_models', function (Blueprint $table) {
-            $table->id();
-            $table->json('data')->nullable();
-            $table->timestamps();
+        Schema::table('data_models', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -26,6 +24,8 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('data_models');
+        Schema::table('data_models', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('user_id');
+        });
     }
 };

@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::middleware('auth:sanctum')->group(function () {
+//    Route::get('/data/all', [\App\Http\Controllers\DataController::class, 'index']);
+    Route::match(['get', 'post'], 'data', [\App\Http\Controllers\DataController::class, 'store'])->middleware('rt');
+    Route::match(['get', 'post'], 'data/update', [\App\Http\Controllers\DataController::class, 'update']);
+});
+Route::get('/data/all', [\App\Http\Controllers\DataController::class, 'index']);
+
+
