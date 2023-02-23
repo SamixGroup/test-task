@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+         $user = \App\Models\User::factory(1)->create();
+
+         printf("Created a default user with email: %s and password: randomPWD", $user->first()->email);
     }
 }
