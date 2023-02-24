@@ -30,10 +30,10 @@ class DataPolicy
      * @param \App\Models\DataModel $dataModel
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, DataModel $dataModel)
-    {
-        return $user->id === $dataModel->user_id;
-    }
+//    public function delete(User $user, DataModel $dataModel)
+//    {
+//        return $user->id === $dataModel->user_id;
+//    }
 
 
 }

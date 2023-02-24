@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/data/all', [\App\Http\Controllers\DataController::class, 'index']);
+Route::delete('/data/{id}', [\App\Http\Controllers\DataController::class, 'delete'])->name('data.delete');
+Route::get('/data/{id}', [\App\Http\Controllers\DataController::class, 'show'])->name('data.show');

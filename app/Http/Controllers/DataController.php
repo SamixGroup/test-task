@@ -244,7 +244,5 @@ class DataController extends Controller
 //        if (!$request->user()->can('delete', $model)) return Response::deny("You're not allowed to delete this object");
         $model->delete();
         return view('items.detail', ['items' => $model->data, 'id' => $id]);
-
-
     }
 }

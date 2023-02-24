@@ -17,8 +17,9 @@
                 <td><a class="btn btn-info" href="{{route('data.show', ['id'=>$item->id])}}"> <i class="bi bi-eye"></i>
                     </a></td>
                 <td>
-                    <form action="{{route('data.delete',['id'=>$item->id])}}">
+                    <form method="post" action="{{route('data.delete',['id'=>$item->id])}}">
                         @method('DELETE')
+                        @csrf
                         <button class="btn btn-danger"><i
                                 class="bi bi-trash"></i></button>
                     </form>
