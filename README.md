@@ -16,3 +16,8 @@ Steps to install dependencies and run application:
 - Follow {host}/api/documentation for detailed info about api/web endpoints. Also you can find there forms from 4th subtask.
 
 In order to execute scripts which require authorization click "Authorize" button on the right and input your token in the format `Bearer <token>`
+
+
+## Additional
+
+- You can run tests with `php artisan test`
