@@ -23,5 +23,17 @@ class DataPolicy
         return $user->id === $dataModel->user_id;
     }
 
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\DataModel $dataModel
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function delete(User $user, DataModel $dataModel)
+    {
+        return $user->id === $dataModel->user_id;
+    }
+
 
 }

@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataModel;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use JetBrains\PhpStorm\NoReturn;
 
 class DataController extends Controller
 {
@@ -40,7 +37,7 @@ class DataController extends Controller
      */
     public function index()
     {
-        return DataModel::all();
+        return view('items.list', ['items' => DataModel::all()]);
     }
 
     /**
@@ -173,7 +170,7 @@ class DataController extends Controller
      * )
      *
      **/
-     /**
+    /**
      * @OA\Get(
      *  operationId="updateDataGet",
      *  summary="Update Data with GET",
@@ -192,17 +189,17 @@ class DataController extends Controller
      *          type="integer",
      *      )
      * ),
-      * @OA\Parameter (
-      *      parameter="actions",
-      *      in="query",
-      *      name="actions",
-      *      required=true,
-      *      description="actions to apply to Data",
-      *      @OA\Schema(
-      *          type="string",
-      *          example="$data->list->sublist[0] = 0;"
-      *      )
-      * ),
+     * @OA\Parameter (
+     *      parameter="actions",
+     *      in="query",
+     *      name="actions",
+     *      required=true,
+     *      description="actions to apply to Data",
+     *      @OA\Schema(
+     *          type="string",
+     *          example="$data->list->sublist[0] = 0;"
+     *      )
+     * ),
      *  path="/api/data/update",
      *
      *  @OA\Response(response="201",description="Data created",
@@ -232,6 +229,22 @@ class DataController extends Controller
         $model->data = $data;
         $model->save();
         return $model;
+
+    }
+
+    public function show(Request $request, int $id)
+    {
+        $model = DataModel::find($id);
+        return view('items.detail', ['items' => $model->data, 'id' => $id]);
+    }
+
+    public function delete(Request $request, int $id)
+    {
+        $model = DataModel::find($id);
+//        if (!$request->user()->can('delete', $model)) return Response::deny("You're not allowed to delete this object");
+        $model->delete();
+        return view('items.detail', ['items' => $model->data, 'id' => $id]);
+
 
     }
 }
