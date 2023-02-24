@@ -20,7 +20,7 @@ class DataController extends Controller
 
     /**
      * @OA\Get(
-     *  path="/api/data/all",
+     *  path="/data/all",
      *  operationId="indexData",
      *  tags={"Datas"},
      *  security={
@@ -28,8 +28,7 @@ class DataController extends Controller
      *  },
      *  summary="Get list of Data",
      *  description="Returns list of Data",
-     *  @OA\Response(response=200, description="Successful operation",
-     *    @OA\JsonContent(ref="#/components/schemas/DataModel"),
+     *  @OA\Response(response=200, description="Successful operation"),
      *  ),
      * )
      *
@@ -170,6 +169,10 @@ class DataController extends Controller
      * )
      *
      **/
+    public function updatePost()
+    {
+    }
+
     /**
      * @OA\Get(
      *  operationId="updateDataGet",
@@ -232,12 +235,83 @@ class DataController extends Controller
 
     }
 
+    /**
+     * @OA\Get(
+     *  operationId="getData",
+     *  summary="Display Data with specific ID",
+     *  description="Display Data with specific ID",
+     *  tags={"Datas"},
+     *  security={
+     *      {"sanctum":{}},
+     *  },
+     * @OA\Parameter (
+     *      parameter="id",
+     *      in="path",
+     *      name="id",
+     *      required=true,
+     *      description="id of Data",
+     *      @OA\Schema(
+     *          type="integer",
+     *      )
+     * ),
+     *  path="/data/{id}",
+     *
+     *  @OA\Response(response="201",description="Data created",
+     *     @OA\JsonContent(
+     *      @OA\Property(
+     *       title="data",
+     *       property="data",
+     *       type="object",
+     *       ref="#/components/schemas/DataModel"
+     *      ),
+     *    ),
+     *  ),
+     *  @OA\Response(response=422,description="Validation exception"),
+     * )
+     *
+     **/
     public function show(Request $request, int $id)
     {
-        $model = DataModel::find($id);
+        $model = DataModel::findOrFail($id);
         return view('items.detail', ['items' => $model->data, 'id' => $id]);
     }
 
+    /**
+     * @OA\Delete(
+     *  path="/api/data/{id}",
+     *  summary="Delete a Data",
+     *  description="Delete a Data",
+     *  operationId="deleteData",
+     *  tags={"Datas"},
+     *  security={
+     *      {"sanctum":{}},
+     *  },
+     * @OA\Parameter (
+     *      parameter="id",
+     *      in="path",
+     *      name="id",
+     *      required=true,
+     *      description="id of Data",
+     *      @OA\Schema(
+     *          type="integer",
+     *      )
+     * ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Successful operation",
+     *       @OA\JsonContent(
+     *       @OA\Property(
+     *       title="data",
+     *       property="data",
+     *       type="object",
+     *       ref="#/components/schemas/DataModel"
+     *       ),
+     *     ),
+     *   ),
+     *  @OA\Response(response=204,description="No content"),
+     *  @OA\Response(response=404,description="Data not found"),
+     * )
+     **/
     public function delete(Request $request, int $id)
     {
         $model = DataModel::find($id);

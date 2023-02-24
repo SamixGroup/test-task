@@ -18,16 +18,16 @@ class ResponseTime
      */
     public function handle(Request $request, Closure $next)
     {
-        define('MEMORY_START', memory_get_usage());
+        $memory_start = memory_get_usage();
         $response = $next($request);
         $content = json_decode($response->content(), true);
 
         if (defined('LARAVEL_START')) {
 //
 //            $response->headers->add(['X-RESPONSE-TIME' => microtime(true) - LARAVEL_START]);
-//            $response->headers->add(['X-MEMORY-USAGE' => memory_get_usage() - MEMORY_START]);
+//            $response->headers->add(['X-MEMORY-USAGE' => memory_get_usage() - $memory_start]);
             $content['response_time'] = microtime(true) - LARAVEL_START;
-            $content['memory_usage'] = memory_get_usage() - MEMORY_START;
+            $content['memory_usage'] = memory_get_usage() - $memory_start;
         }
 
         $response->setContent(json_encode($content));

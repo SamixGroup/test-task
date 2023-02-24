@@ -24,6 +24,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::match(['get', 'post'], 'data', [\App\Http\Controllers\DataController::class, 'store'])->middleware('rt');
     Route::match(['get', 'post'], 'data/update', [\App\Http\Controllers\DataController::class, 'update']);
 });
+Route::delete('/data/{id}', [\App\Http\Controllers\DataController::class, 'delete'])->name('data.delete');
+
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', function () {
+    return Response::HTTP_OK;
+});
 Route::get('/data/all', [\App\Http\Controllers\DataController::class, 'index']);
-Route::delete('/data/{id}', [\App\Http\Controllers\DataController::class, 'delete'])->name('data.delete');
 Route::get('/data/{id}', [\App\Http\Controllers\DataController::class, 'show'])->name('data.show');
