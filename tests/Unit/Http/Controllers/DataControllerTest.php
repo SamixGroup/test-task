@@ -31,7 +31,6 @@ class DataControllerTest extends TestCase
                 'test' => 'ok'
             ]
         ]);
-        usleep(100);
         $data_id = json_decode($response->content())->id;
         $response = $this->withHeaders(['Authorization' => 'Bearer ' . $token])->post('/api/data/update', [
             'id' => $data_id,
