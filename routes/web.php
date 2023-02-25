@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 Route::get('/data/all', [\App\Http\Controllers\DataController::class, 'index']);
 Route::get('/data/{id}', [\App\Http\Controllers\DataController::class, 'show'])->name('data.show');
+
+Route::get('/logs', function () {
+    return view('logs.list', ['logs' => DB::table('custom_logs')->get()]);
+});

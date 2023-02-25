@@ -24,3 +24,4 @@ the format `Bearer <token>`
 - You can run tests with `php artisan test`
 - Additional task 1: if you want to set a rate limit. Change `max_attempts` inside config/throttle.php. By default, a
   client can send up to 60 requests per minute 
+- Additional task 2: To view logs visit {host}/logs
